@@ -11,7 +11,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 public class Main extends javax.swing.JFrame {
-
+    
     public Main() {
         initComponents();
         getContentPane().setBackground(new Color(240, 240, 240));
