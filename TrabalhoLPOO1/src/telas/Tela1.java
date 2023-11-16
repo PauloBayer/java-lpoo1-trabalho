@@ -5,6 +5,7 @@
  */
 package telas;
 
+import java.awt.BorderLayout;
 import transitions.TransitionsForm;
 
 /**
@@ -18,8 +19,16 @@ public class Tela1 extends TransitionsForm {
      */
     public Tela1() {
         initComponents();
+        configurarLayout();
     }
+    private void configurarLayout() {
+        setLayout(new BorderLayout()); // Configura o layout do painel principal como BorderLayout
 
+        jPanel1.setBackground(new java.awt.Color(235, 155, 89));
+
+        // Adiciona jPanel1 ao centro do BorderLayout
+        add(jPanel1, BorderLayout.CENTER);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,33 +38,151 @@ public class Tela1 extends TransitionsForm {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        inputName = new javax.swing.JTextField();
+        inputSobreNome = new javax.swing.JTextField();
+        inputRG = new javax.swing.JTextField();
+        inputCPF = new javax.swing.JTextField();
+        inputEndereco = new javax.swing.JTextField();
+        bCriar = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(79, 79, 79));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tela 1");
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(235, 155, 89));
+
+        inputName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputNameActionPerformed(evt);
+            }
+        });
+
+        inputSobreNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSobreNomeActionPerformed(evt);
+            }
+        });
+
+        inputRG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputRGActionPerformed(evt);
+            }
+        });
+
+        inputCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputCPFActionPerformed(evt);
+            }
+        });
+
+        inputEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputEnderecoActionPerformed(evt);
+            }
+        });
+
+        bCriar.setText("Criar");
+        bCriar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bCriarMouseClicked(evt);
+            }
+        });
+        bCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCriarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inputEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputRG, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(bCriar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bCriar)
+                .addGap(12, 12, 12))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(237, 237, 237)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(70, 70, 70)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputNameActionPerformed
+
+    private void inputSobreNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSobreNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputSobreNomeActionPerformed
+
+    private void inputRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputRGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputRGActionPerformed
+
+    private void inputCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputCPFActionPerformed
+
+    private void inputEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputEnderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputEnderecoActionPerformed
+
+    private void bCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCriarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bCriarActionPerformed
+
+    private void bCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bCriarMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bCriarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton bCriar;
+    private javax.swing.JTextField inputCPF;
+    private javax.swing.JTextField inputEndereco;
+    private javax.swing.JTextField inputName;
+    private javax.swing.JTextField inputRG;
+    private javax.swing.JTextField inputSobreNome;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
