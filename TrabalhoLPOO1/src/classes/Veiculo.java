@@ -32,12 +32,11 @@ public class Veiculo implements VeiculoI {
         this.valorDeCompra = valorDeCompra;
     }
     
-    @Override
-    public void locar(int dias, Calendar data, Cliente cliente) {
+    public void locar(int dias,double valor, Calendar data, Cliente cliente) {
         if (this.estado != Estado.VENDIDO) {
             this.estado = Estado.LOCADO;
-            this.locacao = new Locacao(dias, data, cliente) {
-
+            this.locacao = new Locacao(dias,valor,data, cliente){
+                
             };
 
             this.getValorDiariaLocacao();

@@ -12,11 +12,11 @@ import enums.ModeloAutomovel;
  *
  * @author paulo
  */
-public class Automavel extends Veiculo {
+public class Automovel extends Veiculo {
     
     private final ModeloAutomovel modelo;
     
-    public Automavel(Marca marca, Categoria categoria, double valorDeCompra, ModeloAutomovel modelo) {
+    public Automovel(Marca marca, Categoria categoria, double valorDeCompra, ModeloAutomovel modelo) {
         super(marca, categoria, valorDeCompra);
         this.modelo = modelo;
     };

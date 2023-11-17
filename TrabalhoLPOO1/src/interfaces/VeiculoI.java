@@ -8,6 +8,8 @@ import enums.Categoria;
 import enums.Estado;
 import enums.Marca;
 import java.util.Calendar;
+import classes.Cliente;
+import classes.Locacao;
 
 /**
  * 
