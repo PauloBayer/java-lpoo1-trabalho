@@ -15,12 +15,12 @@ import java.util.Calendar;
  * 
  * @author paulo
  */
-public class Veiculo implements VeiculoI {
+public abstract class Veiculo implements VeiculoI {
     
     private Marca marca;
     private Estado estado;
     private Locacao locacao;
-    private Categoria categoria;
+    private final Categoria categoria;
     private final double valorDeCompra;
     private String placa;
     private int ano;

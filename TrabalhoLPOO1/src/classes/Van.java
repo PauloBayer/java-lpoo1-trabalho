@@ -12,15 +12,19 @@ import enums.ModeloVan;
  *
  * @author janai
  */
-public class Van extends Veiculo {
+public abstract class Van extends Veiculo {
+    
     private final ModeloVan modelo;
+    
     public Van(Marca marca, Categoria categoria, double valorDeCompra, ModeloVan modelo){
         super(marca, categoria, valorDeCompra);
         this.modelo = modelo;
-    }
+    };
+    
     public ModeloVan getModelo(){
         return this.modelo;
-    }
+    };
+    
     @Override
     public double getValorDiariaLocacao(){
     switch(this.getCategoria()) {
@@ -36,6 +40,6 @@ public class Van extends Veiculo {
             default -> {
                 return 0;
             }
-    }
+        }
     }
 }

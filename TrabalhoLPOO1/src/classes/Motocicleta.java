@@ -12,7 +12,7 @@ import enums.ModeloMotocicleta;
  *
  * @author paulo
  */
-public class Motocicleta extends Veiculo {
+public abstract class Motocicleta extends Veiculo {
     
     private final ModeloMotocicleta modelo;
     
