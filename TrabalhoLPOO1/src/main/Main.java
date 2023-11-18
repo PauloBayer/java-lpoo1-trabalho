@@ -68,7 +68,7 @@ public class Main extends javax.swing.JFrame {
         navigationBar1.setnavigationBackgroundColor(nb);
     }
 
-    public static void addVeiculos(Veiculo veiculo) {
+    public static void addVeiculo(Veiculo veiculo) {
         if (veiculos == null) {
             veiculos = new Veiculo[1];
             veiculos[0] = veiculo;
@@ -79,9 +79,6 @@ public class Main extends javax.swing.JFrame {
             }
             newVeiculos[veiculos.length] = veiculo;
             veiculos = newVeiculos;
-        }
-        for (int i = 0; i < veiculos.length; i++) {
-            System.out.println(veiculos[i].imprime());
         }
     }
 

@@ -25,13 +25,6 @@ public abstract class Veiculo implements VeiculoI {
     private String placa;
     private int ano;
     
-    public String imprime() {
-        String resultado = "Marca: " + this.getMarca() + " Estado: " + this.getEstado();
-        resultado += " Categoria: " + this.getCategoria() + " valorDeVenda: " + this.getValorParaVenda();
-        resultado += " Placa: " + this.getPlaca() + " Ano: " + this.getAno();
-        return resultado;
-    }
-    
     public Veiculo(Marca marca, Categoria categoria, Estado estado, double valorDeCompra, String placa, int ano) {
         this.locacao = null;
         this.marca = marca;
