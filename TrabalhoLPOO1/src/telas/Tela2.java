@@ -6,6 +6,8 @@
 package telas;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 import classes.Automovel;
 import classes.Motocicleta;
@@ -19,6 +21,8 @@ import enums.ModeloVan;
 import main.Main;
 
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
+
 import transitions.TransitionsForm;
 
 /**
@@ -53,8 +57,6 @@ public class Tela2 extends TransitionsForm {
         MarcaComboBox = new javax.swing.JComboBox<>();
         CategoriaComboBox = new javax.swing.JComboBox<>();
         EstadoComboBox = new javax.swing.JComboBox<>();
-        ValorTextField = new javax.swing.JTextField();
-        PlacaTextField = new javax.swing.JTextField();
         CadastrarVeiculoButton = new javax.swing.JButton();
         AutomovelRadioButton = new javax.swing.JRadioButton();
         MotocicletaRadioButton = new javax.swing.JRadioButton();
@@ -72,6 +74,22 @@ public class Tela2 extends TransitionsForm {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+
+        try {
+            MaskFormatter mascaraPlaca = new MaskFormatter("UUU-####");
+            mascaraPlaca.setValidCharacters("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+            PlacaTextField = new JFormattedTextField(mascaraPlaca);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            MaskFormatter mascaraValor = new MaskFormatter("R$ ###.###,00");
+            mascaraValor.setPlaceholderCharacter('0');
+            ValorTextField = new JFormattedTextField(mascaraValor);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(79, 79, 79));
@@ -187,11 +205,10 @@ public class Tela2 extends TransitionsForm {
                                             .addComponent(jLabel7)
                                             .addComponent(VanRadioButton)
                                             .addComponent(jLabel8)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(PlacaTextField)
-                                                .addComponent(EstadoComboBox, 0, 146, Short.MAX_VALUE))
+                                            .addComponent(EstadoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(ValorTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(PlacaTextField, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGap(35, 35, 35)))))))
                 .addContainerGap())
@@ -235,13 +252,13 @@ public class Tela2 extends TransitionsForm {
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PlacaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CadastrarVeiculoButton))
+                            .addComponent(CadastrarVeiculoButton)
+                            .addComponent(PlacaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(ValorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))))
+                        .addGap(57, 57, 57))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -252,27 +269,32 @@ public class Tela2 extends TransitionsForm {
         ModeloAutomovel modeloAutomovel = ModeloAutomovel.valueOf(ModeloAutomovelComboBox.getSelectedItem().toString());
         ModeloMotocicleta modeloMotocicleta = ModeloMotocicleta.valueOf(ModeloMotocicletaComboBox.getSelectedItem().toString());
         ModeloVan modeloVan = ModeloVan.valueOf(ModeloVanComboBox.getSelectedItem().toString());
-        double valor = Double.parseDouble(ValorTextField.getText());
-        String placa = PlacaTextField.getText();
+        double valor = Double.parseDouble(getRawValue(ValorTextField));
+        String placa = getRawValue(PlacaTextField);
         int ano = Integer.parseInt(AnoTextField.getText());
 
         if (AutomovelRadioButton.isSelected()) {
             
             Automovel automovel = new Automovel(marca, categoria, estado, valor, placa, ano, modeloAutomovel);
-            Main.addVeiculos(automovel);
+            Main.addVeiculo(automovel);
 
         } else if (MotocicletaRadioButton.isSelected()) {
             
             Motocicleta motocicleta = new Motocicleta(marca, categoria, estado, valor, placa, ano, modeloMotocicleta);
-            Main.addVeiculos(motocicleta);
+            Main.addVeiculo(motocicleta);
 
         } else if (VanRadioButton.isSelected()) {
             
             Van van = new Van(marca, categoria, estado, valor, placa, ano, modeloVan);
-            Main.addVeiculos(van);
+            Main.addVeiculo(van);
 
         }
     }//GEN-LAST:event_CadastrarVeiculoButtonActionPerformed
+    
+    private String getRawValue(JFormattedTextField textField) {
+        String formattedText = textField.getText();
+        return formattedText.replaceAll("[^0-9]", "");
+    }
     
     private void addRadioButtonsToGroup() {
         buttonGroup1.add(AutomovelRadioButton);
@@ -372,8 +394,8 @@ public class Tela2 extends TransitionsForm {
     private javax.swing.JComboBox<String> ModeloMotocicletaComboBox;
     private javax.swing.JComboBox<String> ModeloVanComboBox;
     private javax.swing.JRadioButton MotocicletaRadioButton;
-    private javax.swing.JTextField PlacaTextField;
-    private javax.swing.JTextField ValorTextField;
+    private javax.swing.JFormattedTextField PlacaTextField;
+    private javax.swing.JFormattedTextField ValorTextField;
     private javax.swing.JRadioButton VanRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
