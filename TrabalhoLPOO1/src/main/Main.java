@@ -9,9 +9,21 @@ import componentesMain.EventNavigationBar;
 import componentesMain.NavigationBackgroundColor;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import classes.Cliente;
 
 public class Main extends javax.swing.JFrame {
-    
+    public static Cliente [] clientes;
+    public static void addCliente(Cliente cliente){
+        if (clientes == null) {
+            clientes = new Cliente[1];
+            clientes[0] = cliente;
+        } else {
+            Cliente[] N_clientes = new Cliente[clientes.length + 1];
+            System.arraycopy(clientes, 0, N_clientes, 0, clientes.length);
+            N_clientes[clientes.length] = cliente;
+            clientes = N_clientes;
+        }
+    }
     public Main() {
         initComponents();
         getContentPane().setBackground(new Color(240, 240, 240));
