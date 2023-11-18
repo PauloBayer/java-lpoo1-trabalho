@@ -1,5 +1,6 @@
 package main;
 
+import classes.Veiculo;
 import telas.Tela1;
 import telas.Tela2;
 import telas.Tela3;
@@ -12,7 +13,10 @@ import javax.swing.ImageIcon;
 import classes.Cliente;
 
 public class Main extends javax.swing.JFrame {
+
+    public static Veiculo[] veiculos;
     public static Cliente [] clientes;
+    
     public static void addCliente(Cliente cliente){
         if (clientes == null) {
             clientes = new Cliente[1];
@@ -24,6 +28,7 @@ public class Main extends javax.swing.JFrame {
             clientes = N_clientes;
         }
     }
+    
     public Main() {
         initComponents();
         getContentPane().setBackground(new Color(240, 240, 240));
@@ -61,6 +66,23 @@ public class Main extends javax.swing.JFrame {
         nb.addColor(3, new Color(126, 209, 132));
         nb.addColor(4, new Color(226, 222, 131));
         navigationBar1.setnavigationBackgroundColor(nb);
+    }
+
+    public static void addVeiculos(Veiculo veiculo) {
+        if (veiculos == null) {
+            veiculos = new Veiculo[1];
+            veiculos[0] = veiculo;
+        } else {
+            Veiculo[] newVeiculos = new Veiculo[veiculos.length + 1];
+            for (int i = 0; i < veiculos.length; i++) {
+                newVeiculos[i] = veiculos[i];
+            }
+            newVeiculos[veiculos.length] = veiculo;
+            veiculos = newVeiculos;
+        }
+        for (int i = 0; i < veiculos.length; i++) {
+            System.out.println(veiculos[i].imprime());
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -4,7 +4,10 @@
  */
 package classes;
 
+import java.util.Calendar;
+
 import enums.Categoria;
+import enums.Estado;
 import enums.Marca;
 import enums.ModeloAutomovel;
 
@@ -12,12 +15,12 @@ import enums.ModeloAutomovel;
  *
  * @author paulo
  */
-public abstract class Automovel extends Veiculo {
+public class Automovel extends Veiculo {
     
     private final ModeloAutomovel modelo;
     
-    public Automovel(Marca marca, Categoria categoria, double valorDeCompra, ModeloAutomovel modelo) {
-        super(marca, categoria, valorDeCompra);
+    public Automovel(Marca marca, Categoria categoria, Estado estado, double valorDeCompra, String placa, int ano, ModeloAutomovel modelo) {
+        super(marca, categoria, estado, valorDeCompra, placa, ano);
         this.modelo = modelo;
     };
     
@@ -41,6 +44,11 @@ public abstract class Automovel extends Veiculo {
                  return 0;
             }
         }
-    };
+    }
     
+    @Override
+    public void locar(int dias, Calendar data, Cliente cliente) {
+        throw new UnsupportedOperationException("Método locar não implementado em Automovel");
+    }
+
 }
