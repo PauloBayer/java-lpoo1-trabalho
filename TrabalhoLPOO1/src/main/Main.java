@@ -1,5 +1,6 @@
 package main;
 
+import classes.Veiculo;
 import telas.Tela1;
 import telas.Tela2;
 import telas.Tela3;
@@ -11,6 +12,8 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 public class Main extends javax.swing.JFrame {
+    
+    public static Veiculo[] veiculos;
     
     public Main() {
         initComponents();
@@ -49,6 +52,23 @@ public class Main extends javax.swing.JFrame {
         nb.addColor(3, new Color(126, 209, 132));
         nb.addColor(4, new Color(226, 222, 131));
         navigationBar1.setnavigationBackgroundColor(nb);
+    }
+
+    public static void addVeiculos(Veiculo veiculo) {
+        if (veiculos == null) {
+            veiculos = new Veiculo[1];
+            veiculos[0] = veiculo;
+        } else {
+            Veiculo[] newVeiculos = new Veiculo[veiculos.length + 1];
+            for (int i = 0; i < veiculos.length; i++) {
+                newVeiculos[i] = veiculos[i];
+            }
+            newVeiculos[veiculos.length] = veiculo;
+            veiculos = newVeiculos;
+        }
+        for (int i = 0; i < veiculos.length; i++) {
+            System.out.println(veiculos[i].imprime());
+        }
     }
 
     @SuppressWarnings("unchecked")

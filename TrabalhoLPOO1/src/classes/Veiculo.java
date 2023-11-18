@@ -25,14 +25,24 @@ public abstract class Veiculo implements VeiculoI {
     private String placa;
     private int ano;
     
-    public Veiculo(Marca marca, Categoria categoria, double valorDeCompra) {
-        this.estado = Estado.NOVO;
-        this.locacao = null;
-        this.categoria = categoria;
-        this.valorDeCompra = valorDeCompra;
+    public String imprime() {
+        String resultado = "Marca: " + this.getMarca() + " Estado: " + this.getEstado();
+        resultado += " Categoria: " + this.getCategoria() + " valorDeVenda: " + this.getValorParaVenda();
+        resultado += " Placa: " + this.getPlaca() + " Ano: " + this.getAno();
+        return resultado;
     }
     
-    public void locar(int dias,double valor, Calendar data, Cliente cliente) {
+    public Veiculo(Marca marca, Categoria categoria, Estado estado, double valorDeCompra, String placa, int ano) {
+        this.locacao = null;
+        this.marca = marca;
+        this.estado = estado;
+        this.categoria = categoria;
+        this.valorDeCompra = valorDeCompra;
+        this.placa = placa;
+        this.ano = ano;
+    }
+    
+    public void locar(int dias, double valor, Calendar data, Cliente cliente) {
         if (this.estado != Estado.VENDIDO) {
             this.estado = Estado.LOCADO;
             this.locacao = new Locacao(dias,valor,data, cliente){
