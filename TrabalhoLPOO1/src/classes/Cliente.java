@@ -86,4 +86,8 @@ public class Cliente implements ClienteI{
     public static Cliente getCliente(int index){
         return clientes[index];
     }
+    
+    public static Cliente[] getAllClientes() {
+        return clientes;
+    }
 }

@@ -248,7 +248,7 @@ public class Tela3 extends TransitionsForm {
 
     private void bPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPesquisarClienteActionPerformed
     String infoCliente = inputSearchCliente.getText(); 
-    Cliente[] arrayClientes = Main.clienteTeste;
+    Cliente[] arrayClientes = Cliente.getAllClientes();
     Cliente[] informacoesEncontradas = new Cliente[1]; // Array para armazenar informações encontradas
 
     boolean encontrado = false;

@@ -316,7 +316,7 @@ public class Tela2 extends TransitionsForm {
         ModeloVanComboBox.setVisible(false);
     }
     
-        private void addRadioButtonListeners() {
+    private void addRadioButtonListeners() {
         AutomovelRadioButton.addItemListener(new java.awt.event.ItemListener() {
             @Override
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -392,7 +392,7 @@ public class Tela2 extends TransitionsForm {
             modeloVan[i] = ModeloVan.values()[i].toString();
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AnoTextField;
     private javax.swing.JRadioButton AutomovelRadioButton;
