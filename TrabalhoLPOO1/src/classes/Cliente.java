@@ -41,8 +41,12 @@ public class Cliente implements ClienteI{
         
     };
     @Override
-    public void ChangeCliente(){
-        System.out.println("mudado");
+    public void ChangeCliente(String name,String sobrenome,int RG,int CPF,String endereco){
+        this.name=name;
+        this.sobreNome=sobrenome;
+        this.RG=RG;
+        this.CPF=CPF;
+        this.endereco=endereco;
     };
     @Override
     public void DeleteCliente(){
