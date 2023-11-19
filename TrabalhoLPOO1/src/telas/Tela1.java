@@ -7,20 +7,35 @@ package telas;
 
 import transitions.TransitionsForm;
 import classes.Cliente;
-import main.Main;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
- * @author RAVEN
+ * @author janaina
  */
 public class Tela1 extends TransitionsForm {
-
     /**
      * Creates new form Form
      */
     public Tela1() {
         initComponents();
+        DefaultTableModel modeloTabela = (DefaultTableModel) tableClient.getModel();
+        modeloTabela.setRowCount(0);
+            Cliente [] arrayClientes = Cliente.getClientes();
+            if ((arrayClientes != null)&&(arrayClientes.length > 0)) {
+                for (int i = 0; i < arrayClientes.length; i++) {
+                    try {
+                        modeloTabela.addRow(new Object[]{i, arrayClientes[i].getName(),
+                            arrayClientes[i].getSobrenome(), arrayClientes[i].getRG(),
+                            arrayClientes[i].getCPF(), arrayClientes[i].getEndereco()});
+                    } catch (Exception e) {
+                        // Trate a exceção conforme necessário
+                        e.printStackTrace();
+                    }
+                }
+            }
     }
 
     /**
@@ -45,6 +60,10 @@ public class Tela1 extends TransitionsForm {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        bExcluir = new javax.swing.JButton();
+        bEdit = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableClient = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,24 +177,100 @@ public class Tela1 extends TransitionsForm {
                 .addGap(27, 27, 27))
         );
 
+        bExcluir.setText("Excluir");
+        bExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExcluirActionPerformed(evt);
+            }
+        });
+
+        bEdit.setText("Editar");
+        bEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditActionPerformed(evt);
+            }
+        });
+
+        tableClient.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Sobrenome", "RG", "CPF", "Endereço"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tableClient);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
+                .addGap(364, 364, 364)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bExcluir)
+                        .addGap(51, 51, 51))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bEdit)
+                    .addComponent(bExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,13 +301,22 @@ public class Tela1 extends TransitionsForm {
         String S_RG = inputRG.getText();
         String S_CPF = inputCPF.getText();
         String endereco = inputEndereco.getText();
-        
         try {
-        int RG = Integer.parseInt(S_RG);
-        int CPF = Integer.parseInt(S_CPF);
-        Cliente novoCliente = new Cliente(nome, sobrenome, RG, CPF, endereco);
-        Main.addCliente(novoCliente);
-        JOptionPane.showMessageDialog(this, "Cliente criado com sucesso!",
+            int RG = Integer.parseInt(S_RG);
+            int CPF = Integer.parseInt(S_CPF);
+            
+            Cliente novoCliente = new Cliente(nome, sobrenome, RG, CPF, endereco);
+            //cria linha na tabela
+            DefaultTableModel modeloTabela = (DefaultTableModel) tableClient.getModel();
+            modeloTabela.setRowCount(0);
+            Cliente [] arrayClientes = Cliente.getClientes();
+           for(int i=0;i<arrayClientes.length;i++){
+                modeloTabela.addRow(new Object[]{arrayClientes[i].getName(),
+                    arrayClientes[i].getSobrenome(),arrayClientes[i].getRG(),arrayClientes[i].getCPF(),arrayClientes[i].getEndereco()});
+            }
+            
+           
+            JOptionPane.showMessageDialog(this, "Cliente criado com sucesso!",
                 "Sucesso ao criar cliente", JOptionPane.INFORMATION_MESSAGE);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Erro ao criar cliente. Certifique-se de que RG e CPF são números válidos.",
@@ -225,9 +329,33 @@ public class Tela1 extends TransitionsForm {
         
     }//GEN-LAST:event_bCriarMouseClicked
 
+    private void bEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bEditActionPerformed
+
+    private void bExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tableClient.getSelectedRow();
+
+    // Verificar se alguma linha está selecionada
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um cliente para excluir.",
+                "Erro ao excluir cliente", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    // Remove a linha selecionada na tabela
+    DefaultTableModel modeloTabela = (DefaultTableModel) tableClient.getModel();
+    modeloTabela.removeRow(selectedRow);
+    Cliente ClienteExclud = Cliente.getCliente(selectedRow);
+    ClienteExclud.DeleteCliente();
+    }//GEN-LAST:event_bExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCriar;
+    private javax.swing.JButton bEdit;
+    private javax.swing.JButton bExcluir;
     private javax.swing.JTextField inputCPF;
     private javax.swing.JTextField inputEndereco;
     private javax.swing.JTextField inputName;
@@ -240,5 +368,7 @@ public class Tela1 extends TransitionsForm {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableClient;
     // End of variables declaration//GEN-END:variables
 }

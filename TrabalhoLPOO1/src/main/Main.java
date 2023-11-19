@@ -15,19 +15,6 @@ import classes.Cliente;
 public class Main extends javax.swing.JFrame {
 
     public static Veiculo[] veiculos;
-    public static Cliente [] clientes;
-    
-    public static void addCliente(Cliente cliente){
-        if (clientes == null) {
-            clientes = new Cliente[1];
-            clientes[0] = cliente;
-        } else {
-            Cliente[] N_clientes = new Cliente[clientes.length + 1];
-            System.arraycopy(clientes, 0, N_clientes, 0, clientes.length);
-            N_clientes[clientes.length] = cliente;
-            clientes = N_clientes;
-        }
-    }
     
     public Main() {
         initComponents();
@@ -67,7 +54,7 @@ public class Main extends javax.swing.JFrame {
         nb.addColor(4, new Color(226, 222, 131));
         navigationBar1.setnavigationBackgroundColor(nb);
     }
-
+    
     public static void addVeiculo(Veiculo veiculo) {
         if (veiculos == null) {
             veiculos = new Veiculo[1];
