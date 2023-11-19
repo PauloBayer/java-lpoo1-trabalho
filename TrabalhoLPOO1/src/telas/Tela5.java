@@ -21,7 +21,7 @@ import transitions.TransitionsForm;
 
 public class Tela5 extends TransitionsForm {
 
-    private JLabel labelTipo, labelMarca, labelCategoria;
+    private JLabel labelTipo, labelMarca, labelCategoria, labelTitle;
     private JComboBox<String> comboBoxTipo, comboBoxMarca, comboBoxCategoria;
     private JTable tabelaVeiculos;
     private JButton botaoVender;
@@ -46,8 +46,17 @@ public class Tela5 extends TransitionsForm {
         labelCategoria = new JLabel("Categoria:");
         comboBoxCategoria = new JComboBox<>(new String[]{"Categoria 1", "Categoria 2", "Categoria 3"});
         botaoVender = new JButton("Vender");
-        botaoAtualizar = new JButton("Atualizar");
+        botaoAtualizar = new JButton("Atualizar Tabela");
+        labelTitle = new JLabel();
+        JPanel panelTitle = new JPanel();
+        JPanel panelNorth = new JPanel(new GridLayout(2, 1, 5, 5));
 
+        labelTitle.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        labelTitle.setForeground(new java.awt.Color(79, 79, 79));
+        labelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTitle.setText("Vender Veículos");
+        panelTitle.add(labelTitle);
+        
         panelFiltros.add(labelTipo);
         panelFiltros.add(comboBoxTipo);
         panelFiltros.add(labelMarca);
@@ -55,8 +64,11 @@ public class Tela5 extends TransitionsForm {
         
         panelFiltros.add(labelCategoria);
         panelFiltros.add(comboBoxCategoria);
+        
+        panelNorth.add(panelTitle);
+        panelNorth.add(panelFiltros);
 
-        add(panelFiltros, BorderLayout.NORTH);
+        add(panelNorth, BorderLayout.NORTH);
 
         tabelaVeiculos = new JTable();
         scrollPaneTabela = new JScrollPane(tabelaVeiculos);

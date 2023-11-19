@@ -57,7 +57,7 @@ public class Tela3 extends TransitionsForm {
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(79, 79, 79));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Locagem de Automóveis");
+        jLabel2.setText("Locar Veículos");
 
         bPesquisarCliente.setText("Pequisar");
         bPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {

@@ -94,6 +94,32 @@ public class Main extends javax.swing.JFrame {
         }
         return null;
     }
+    
+    public static Veiculo[] getVeiculosLocados() {
+        if (veiculos != null) {
+            Veiculo[] veiculosLocados = new Veiculo[veiculos.length];
+            int index = 0;
+            for (Veiculo veiculo : veiculos) {
+                String estado = veiculo.getEstado().toString();
+                if (estado.equals("LOCADO")) {
+                    veiculosLocados[index] = veiculo;
+                    index++;
+                }
+            }
+            for (int i = 0; i < veiculosLocados.length; i++) {
+                if (veiculosLocados[i] == null) {
+                    Veiculo[] newVeiculosLocados = new Veiculo[i];
+                    for (int j = 0; j < i; j++) {
+                        newVeiculosLocados[j] = veiculosLocados[j];
+                    }
+                    veiculosLocados = newVeiculosLocados;
+                    break;
+                }
+            }
+            return veiculosLocados;
+        }
+        return null;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

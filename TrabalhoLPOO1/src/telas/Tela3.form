@@ -155,7 +155,7 @@
           <Color blue="4f" green="4f" red="4f" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Locagem de Autom&#xf3;veis"/>
+        <Property name="text" type="java.lang.String" value="Locar Ve&#xed;culos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="bPesquisarCliente">

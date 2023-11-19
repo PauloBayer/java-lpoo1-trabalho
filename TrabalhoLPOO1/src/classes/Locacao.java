@@ -8,16 +8,17 @@ import java.util.Calendar;
  * @author janai
  */
 public class Locacao {
+    
     private int dias;
     private double valor;
     private Calendar data;
     private Cliente cliente;
     
-    public Locacao(int dias,double valor,Calendar data,Cliente cliente){
-        this.cliente=cliente;
-        this.data=data;
-        this.dias=dias;
-        this.valor=valor;
+    public Locacao(int dias, double valor, Calendar data, Cliente cliente){
+        this.cliente = cliente;
+        this.data = data;
+        this.dias = dias;
+        this.valor = valor;
     }
     
     public double getValor(){
@@ -30,6 +31,10 @@ public class Locacao {
     
     public Cliente getCliente(){
         return cliente;
+    }
+    
+    public int getDias() {
+        return dias;
     }
     
 }
