@@ -5,7 +5,6 @@
 package classes;
 import java.util.Calendar;
 /**
- *
  * @author janai
  */
 public class Locacao {
