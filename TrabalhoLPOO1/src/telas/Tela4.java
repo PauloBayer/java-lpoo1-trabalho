@@ -136,7 +136,7 @@ public class Tela4 extends TransitionsForm {
         int selectedRow = DevolverTable.getSelectedRow();
         if (selectedRow != -1) {
             int resposta = JOptionPane.showConfirmDialog(Tela4.this,
-                    "Tem certeza que deseja excluir este veículo?", "Confirmar exclusão",
+                    "Tem certeza que deseja devolver este veículo?", "Confirmar devolução",
                     JOptionPane.YES_NO_OPTION);
 
             if (resposta == JOptionPane.YES_OPTION) {
@@ -144,26 +144,12 @@ public class Tela4 extends TransitionsForm {
 
                 Veiculo veiculoParaExcluir = encontrarVeiculoPorPlaca(placa);
 
-                if (veiculoParaExcluir != null) {
-                    
-                    Veiculo[] novaArrayVeiculos = Main.veiculos;
-                    int i = 0;
-                    for (Veiculo veiculo : Main.veiculos) {
-                        if (!veiculo.getPlaca().equals(placa)) {
-                            novaArrayVeiculos[i] = veiculo;
-                            i++;
-                        }
-                    }
-                    for (int j = i; j < novaArrayVeiculos.length; j++) {
-                        novaArrayVeiculos[j] = null;
-                    }
-                    Main.veiculos = novaArrayVeiculos;
+                veiculoParaExcluir.devolver();
+                this.fillTable(Main.getVeiculosDisponiveis());
 
-                    this.fillTable(Main.getVeiculosDisponiveis());
-                }
             }
         } else {
-            JOptionPane.showMessageDialog(Tela4.this, "Selecione um veículo para excluir.",
+            JOptionPane.showMessageDialog(Tela4.this, "Selecione um veículo para devolver.",
                     "Nenhum veículo selecionado", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_DevolverButtonActionPerformed
