@@ -187,9 +187,6 @@ public class Tela3 extends TransitionsForm {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(vanRB3))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(bPesquisarAutomovel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
@@ -201,6 +198,10 @@ public class Tela3 extends TransitionsForm {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bPesquisarAutomovel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -251,21 +252,30 @@ public class Tela3 extends TransitionsForm {
     Cliente[] arrayClientes = Main.clienteTeste;
     Cliente[] informacoesEncontradas = new Cliente[1]; // Array para armazenar informações encontradas
 
-    boolean encontrado = false;
-
     if (arrayClientes != null && arrayClientes.length > 0) {
     for (Cliente cliente : arrayClientes) {
         if (cliente != null &&  (cliente.getName() != null && cliente.getName().equals(infoCliente)) || Integer.toString(cliente.getCPF()).equals(infoCliente)) { 
             // Verifica se o CPF é igual ao pesquisado
             informacoesEncontradas[0] = cliente; // Armazena as informações do cliente encontrado
-            encontrado = true;
-            JOptionPane.showMessageDialog(this, "Encontrado!",
-                "entrei aqui", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
+                "Ação Validai", JOptionPane.INFORMATION_MESSAGE);
             break; // Se encontrou, sai do loop
         }
     }
+     // Verifica se algum dos tipos de locagem está selecionado
+    if (!automovelRB1.isSelected() && !motocicletaRB2.isSelected() && !vanRB3.isSelected()) {
+        JOptionPane.showMessageDialog(this, "Selecione um tipo de locagem.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Verifica se uma marca ou categoria foi selecionada
+    String marcaSelecionada = marcaSelect.getSelectedItem().toString();
+    String categoriaSelecionada = categoriaSelect.getSelectedItem().toString();
+    if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
+        JOptionPane.showMessageDialog(this, "Selecione uma marca ou categoria.", "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
   }
-    
     }//GEN-LAST:event_bPesquisarClienteActionPerformed
 
     private void marcaSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaSelectActionPerformed
@@ -273,7 +283,7 @@ public class Tela3 extends TransitionsForm {
     }//GEN-LAST:event_marcaSelectActionPerformed
 
     private void inputSearchClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchClienteActionPerformed
-       
+            //Input que recebe Nome ou CPF
     }//GEN-LAST:event_inputSearchClienteActionPerformed
 
     private void popularComboBoxes() {
@@ -288,7 +298,7 @@ public class Tela3 extends TransitionsForm {
     // Obtendo os valores do enum Marca
     Marca[] marcasDisponiveis = Marca.values();
 
-    // Iterando e populando o ComboBox marcaSelect
+    // Iterando e preenchendo o ComboBox marcaSelect
     for (Marca marca : marcasDisponiveis) {
         marcaSelect.addItem(marca.toString());
     }
@@ -296,16 +306,15 @@ public class Tela3 extends TransitionsForm {
     // Obtendo os valores do enum Categoria
     Categoria[] categoriasDisponiveis = Categoria.values();
 
-    // Iterando e populando o ComboBox categoriaSelect
+    // Iterando e preenchendo o ComboBox categoriaSelect
     for (Categoria categoria : categoriasDisponiveis) {
         categoriaSelect.addItem(categoria.toString());
     }
 }
     
     private void bPesquisarAutomovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPesquisarAutomovelActionPerformed
+
    
-        popularComboBoxes();
-        
     }//GEN-LAST:event_bPesquisarAutomovelActionPerformed
 
     private void automovelRB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelRB1ActionPerformed
