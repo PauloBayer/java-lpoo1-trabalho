@@ -4,11 +4,13 @@
  */
 package classes;
 import interfaces.ClienteI;
+import java.util.Arrays;
 /**
  *
  * @author janai
  */
 public class Cliente implements ClienteI{
+    private static Cliente[] clientes;
     private String name;
     private String sobreNome;
     private int RG;
@@ -21,11 +23,22 @@ public class Cliente implements ClienteI{
         this.RG=RG;
         this.CPF=CPF;
         this.endereco=endereco;
+        CreateCliente();
     }
-    
+    public static Cliente[] getClientes() {
+        return clientes;
+    }
     @Override
     public  void CreateCliente(){
-        System.out.println("criado");
+        if (clientes == null) {
+            clientes = new Cliente[1];
+            clientes[0] = this;
+        } else {
+            Cliente[] N_clientes = Arrays.copyOf(clientes, clientes.length + 1);
+            N_clientes[clientes.length] = this;
+            clientes = N_clientes;
+        }
+        
     };
     @Override
     public void ChangeCliente(){
@@ -33,7 +46,48 @@ public class Cliente implements ClienteI{
     };
     @Override
     public void DeleteCliente(){
-        System.out.println("excluido");
+        if (clientes != null) {
+            int index = -1;
+            for (int i = 0; i < clientes.length; i++) {
+                if (clientes[i] == this) {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1) {
+                Cliente[] newClientes = new Cliente[clientes.length - 1];
+                System.arraycopy(clientes, 0, newClientes, 0, index);
+                System.arraycopy(clientes, index + 1, newClientes, index, clientes.length - index - 1);
+                clientes = newClientes;
+            }
+        }
     };
     
+    public String getName(){
+        return this.name;
+    }
+    
+    public String getSobrenome(){
+        return this.sobreNome;
+    }
+    
+    public int getRG(){
+        return this.RG;
+    }
+    
+    public int getCPF(){
+        return this.CPF;
+    }
+    
+    public String getEndereco(){
+        return this.endereco;
+    }
+    public static Cliente getCliente(int index){
+        return clientes[index];
+    }
+    
+    public static Cliente[] getAllClientes() {
+        return clientes;
+    }
 }

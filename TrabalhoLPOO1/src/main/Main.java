@@ -15,19 +15,6 @@ import classes.Cliente;
 public class Main extends javax.swing.JFrame {
 
     public static Veiculo[] veiculos;
-    public static Cliente [] clientes;
-    
-    public static void addCliente(Cliente cliente){
-        if (clientes == null) {
-            clientes = new Cliente[1];
-            clientes[0] = cliente;
-        } else {
-            Cliente[] N_clientes = new Cliente[clientes.length + 1];
-            System.arraycopy(clientes, 0, N_clientes, 0, clientes.length);
-            N_clientes[clientes.length] = cliente;
-            clientes = N_clientes;
-        }
-    }
     
     public Main() {
         initComponents();
@@ -67,7 +54,7 @@ public class Main extends javax.swing.JFrame {
         nb.addColor(4, new Color(226, 222, 131));
         navigationBar1.setnavigationBackgroundColor(nb);
     }
-
+    
     public static void addVeiculo(Veiculo veiculo) {
         if (veiculos == null) {
             veiculos = new Veiculo[1];
@@ -80,6 +67,58 @@ public class Main extends javax.swing.JFrame {
             newVeiculos[veiculos.length] = veiculo;
             veiculos = newVeiculos;
         }
+    }
+
+    public static Veiculo[] getVeiculosDisponiveis() {
+        if (veiculos != null) {
+            Veiculo[] veiculosDisponiveis = new Veiculo[veiculos.length];
+            int index = 0;
+            for (Veiculo veiculo : veiculos) {
+                String estado = veiculo.getEstado().toString();
+                if (estado.equals("DISPONÍVEL")) {
+                    veiculosDisponiveis[index] = veiculo;
+                    index++;
+                }
+            }
+            for (int i = 0; i < veiculosDisponiveis.length; i++) {
+                if (veiculosDisponiveis[i] == null) {
+                    Veiculo[] newVeiculosDisponiveis = new Veiculo[i];
+                    for (int j = 0; j < i; j++) {
+                        newVeiculosDisponiveis[j] = veiculosDisponiveis[j];
+                    }
+                    veiculosDisponiveis = newVeiculosDisponiveis;
+                    break;
+                }
+            }
+            return veiculosDisponiveis;
+        }
+        return null;
+    }
+    
+    public static Veiculo[] getVeiculosLocados() {
+        if (veiculos != null) {
+            Veiculo[] veiculosLocados = new Veiculo[veiculos.length];
+            int index = 0;
+            for (Veiculo veiculo : veiculos) {
+                String estado = veiculo.getEstado().toString();
+                if (estado.equals("LOCADO")) {
+                    veiculosLocados[index] = veiculo;
+                    index++;
+                }
+            }
+            for (int i = 0; i < veiculosLocados.length; i++) {
+                if (veiculosLocados[i] == null) {
+                    Veiculo[] newVeiculosLocados = new Veiculo[i];
+                    for (int j = 0; j < i; j++) {
+                        newVeiculosLocados[j] = veiculosLocados[j];
+                    }
+                    veiculosLocados = newVeiculosLocados;
+                    break;
+                }
+            }
+            return veiculosLocados;
+        }
+        return null;
     }
 
     @SuppressWarnings("unchecked")
