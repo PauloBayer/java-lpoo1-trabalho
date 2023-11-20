@@ -132,41 +132,6 @@ public class Tela5 extends TransitionsForm {
             fillTable();
         }
     }
-     private void DevolverButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        int selectedRow = DevolverTable.getSelectedRow();
-        if (selectedRow != -1) {
-            int resposta = JOptionPane.showConfirmDialog(Tela4.this,
-                    "Tem certeza que deseja excluir este veículo?", "Confirmar exclusão",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (resposta == JOptionPane.YES_OPTION) {
-                String placa = (String) DevolverTable.getValueAt(selectedRow, 1);
-
-                Veiculo veiculoParaExcluir = encontrarVeiculoPorPlaca(placa);
-
-                if (veiculoParaExcluir != null) {
-                    
-                    Veiculo[] novaArrayVeiculos = Main.veiculos;
-                    int i = 0;
-                    for (Veiculo veiculo : Main.veiculos) {
-                        if (!veiculo.getPlaca().equals(placa)) {
-                            novaArrayVeiculos[i] = veiculo;
-                            i++;
-                        }
-                    }
-                    for (int j = i; j < novaArrayVeiculos.length; j++) {
-                        novaArrayVeiculos[j] = null;
-                    }
-                    Main.veiculos = novaArrayVeiculos;
-
-                    this.fillTable(Main.getVeiculosDisponiveis());
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(Tela4.this, "Selecione um veículo para excluir.",
-                    "Nenhum veículo selecionado", JOptionPane.WARNING_MESSAGE);
-        }
-    }   
      
     private class VenderVeiculoListener implements ActionListener {
         @Override
