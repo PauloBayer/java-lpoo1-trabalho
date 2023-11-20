@@ -24,7 +24,7 @@ public class Tela3 extends TransitionsForm {
     public Tela3() {
         initComponents();
         popularComboBoxes();
-        fillTable();
+        fillTable(Main.veiculos);
     }
     
     @SuppressWarnings("unchecked")
@@ -54,6 +54,8 @@ public class Tela3 extends TransitionsForm {
         inputSobrenomeCliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         inputCPFCliente = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        LimparFiltroLocarButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 255));
 
@@ -194,6 +196,15 @@ public class Tela3 extends TransitionsForm {
 
         jLabel5.setText("CPF");
 
+        jLabel8.setText("Pesquise com uma das opções");
+
+        LimparFiltroLocarButton.setText("Limpar Filtro de Carros");
+        LimparFiltroLocarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparFiltroLocarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,36 +212,6 @@ public class Tela3 extends TransitionsForm {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(inputSobrenomeCliente))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputCPFCliente)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(marcaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(3, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bPesquisarCliente)
@@ -247,7 +228,44 @@ public class Tela3 extends TransitionsForm {
                         .addComponent(vanRB3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PesquisarClienteButton)
-                        .addGap(262, 262, 262))))
+                        .addGap(262, 262, 262))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inputNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(inputSobrenomeCliente))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inputCPFCliente)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LimparFiltroLocarButton)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(395, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -257,7 +275,9 @@ public class Tela3 extends TransitionsForm {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -270,11 +290,11 @@ public class Tela3 extends TransitionsForm {
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(inputCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
+                            .addComponent(inputCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(automovelRB1)
@@ -290,7 +310,9 @@ public class Tela3 extends TransitionsForm {
                     .addComponent(jLabel7)
                     .addComponent(categoriaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(bPesquisarCliente)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bPesquisarCliente)
+                    .addComponent(LimparFiltroLocarButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -298,7 +320,7 @@ public class Tela3 extends TransitionsForm {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabel2)
-                    .addContainerGap(443, Short.MAX_VALUE)))
+                    .addContainerGap(465, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -317,18 +339,187 @@ public class Tela3 extends TransitionsForm {
             JOptionPane.showMessageDialog(this, "Selecione uma marca ou categoria.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        fillTable();
+        
+        Veiculo[] veiculos = Main.veiculos;
+        Veiculo[] veiculosFiltrados = null; // Array para armazenar veículos filtrados
+
+        if (veiculos != null && veiculos.length > 0) {
+            for (Veiculo veiculo : veiculos) {
+                if (veiculo != null && veiculo.getEstado().equals(Estado.DISPONÍVEL)) {
+                    if (automovelRB1.isSelected() && veiculo instanceof Automovel) {
+                        if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (marcaSelecionada.equals("Selecionar") && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        }
+                    } else if (motocicletaRB2.isSelected() && veiculo instanceof Motocicleta) {
+                        if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (marcaSelecionada.equals("Selecionar") && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        }
+                    } else if (vanRB3.isSelected() && veiculo instanceof Van) {
+                        if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (marcaSelecionada.equals("Selecionar") && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && categoriaSelecionada.equals("Selecionar")) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        } else if (veiculo.getMarca().toString().equals(marcaSelecionada) && veiculo.getCategoria().toString().equals(categoriaSelecionada)) {
+                            if (veiculosFiltrados == null) {
+                                veiculosFiltrados = new Veiculo[1];
+                                veiculosFiltrados[0] = veiculo;
+                            } else {
+                                Veiculo[] newVeiculosFiltrados = veiculosFiltrados;
+                                veiculosFiltrados = new Veiculo[veiculosFiltrados.length + 1];
+                                for (int i = 0; i < newVeiculosFiltrados.length; i++) {
+                                    veiculosFiltrados[i] = newVeiculosFiltrados[i];
+                                }
+                                veiculosFiltrados[veiculosFiltrados.length - 1] = veiculo;
+                            }
+                        }
+                    }
+                }
+            }
+            if (veiculosFiltrados != null) {
+                JOptionPane.showMessageDialog(this, "Veículo(s) encontrado(s)!",
+                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                fillTable(veiculosFiltrados);
+            } else {
+                JOptionPane.showMessageDialog(this, "Nenhum veículo encontrado.",
+                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }                                
+
+        fillTable(veiculosFiltrados);
  
     }//GEN-LAST:event_bPesquisarClienteActionPerformed
 
     private void fillTableCliente(Cliente[] clientes) {
         DefaultTableModel model = (DefaultTableModel) ClientesLocarTable.getModel();
            model.setRowCount(0);
-           System.out.println(clientes.length);
+           
             if (clientes != null) {
             
                 for (Cliente cliente : clientes) {
-                    System.out.println("Bateu em um cliente" + cliente.getName());
                     if (cliente != null) {
                         
                         Object[] rowData = {
@@ -342,10 +533,9 @@ public class Tela3 extends TransitionsForm {
             }
     }
     
-        private void fillTable() {
+        private void fillTable(Veiculo[] veiculos) {
         DefaultTableModel model = (DefaultTableModel) tableFiltrada.getModel();
            model.setRowCount(0);
-           Veiculo[] veiculos = Main.veiculos;
            
             if (veiculos != null) {
             
@@ -450,7 +640,11 @@ public class Tela3 extends TransitionsForm {
                         informacoesEncontradas = new Cliente[1];
                         informacoesEncontradas[0] = cliente;
                     } else {
+                        Cliente[] newInformacoesEncontradas = informacoesEncontradas;
                         informacoesEncontradas = new Cliente[informacoesEncontradas.length + 1];
+                        for (int i = 0; i < newInformacoesEncontradas.length; i++) {
+                            informacoesEncontradas[i] = newInformacoesEncontradas[i];
+                        }
                         informacoesEncontradas[informacoesEncontradas.length - 1] = cliente;
                     }
 
@@ -464,9 +658,14 @@ public class Tela3 extends TransitionsForm {
         }
     }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
 
+    private void LimparFiltroLocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparFiltroLocarButtonActionPerformed
+        fillTable(Main.veiculos);
+    }//GEN-LAST:event_LimparFiltroLocarButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ClientesLocarTable;
+    private javax.swing.JButton LimparFiltroLocarButton;
     private javax.swing.JButton PesquisarClienteButton;
     private javax.swing.JRadioButton automovelRB1;
     private javax.swing.JButton bPesquisarCliente;
@@ -481,6 +680,7 @@ public class Tela3 extends TransitionsForm {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
