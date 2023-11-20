@@ -242,7 +242,7 @@ public class Tela1 extends TransitionsForm {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(364, 364, 364)
+                .addGap(292, 292, 292)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -270,7 +270,7 @@ public class Tela1 extends TransitionsForm {
                     .addComponent(bExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -331,7 +331,19 @@ public class Tela1 extends TransitionsForm {
 
     private void bEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = tableClient.getSelectedRow();
+        if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um cliente para editar.",
+                "Erro", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+        String nome = (String)tableClient.getValueAt(selectedRow,0);
+        String sobrenome = (String)tableClient.getValueAt(selectedRow,1);
+        int RG = (int)tableClient.getValueAt(selectedRow,2);
+        int CPF = (int)tableClient.getValueAt(selectedRow,3);
+        String endereco = (String)tableClient.getValueAt(selectedRow,4);
+        Cliente clienteEdit = Cliente.getCliente(selectedRow);
+        clienteEdit.ChangeCliente(nome,sobrenome,RG,CPF,endereco);
     }//GEN-LAST:event_bEditActionPerformed
 
     private void bExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirActionPerformed
