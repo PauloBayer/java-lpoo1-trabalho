@@ -1,21 +1,32 @@
 package main;
-
+import enums.Categoria;
+import enums.Estado;
+import enums.ModeloAutomovel;
+import enums.ModeloMotocicleta;
+import enums.ModeloVan;
+import classes.Automovel;
 import classes.Veiculo;
 import telas.Tela1;
 import telas.Tela2;
-import telas.Tela3;
+import telas.Tela3;  
 import telas.Tela4;
 import telas.Tela5;
 import componentesMain.EventNavigationBar;
 import componentesMain.NavigationBackgroundColor;
+import enums.Marca;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
+
+import classes.Automovel;
 import classes.Cliente;
 
 public class Main extends javax.swing.JFrame {
 
     public static Veiculo[] veiculos;
-    
+    public static Automovel[] automovel1; 
+ 
+
     public Main() {
         initComponents();
         getContentPane().setBackground(new Color(240, 240, 240));
@@ -52,9 +63,12 @@ public class Main extends javax.swing.JFrame {
         nb.addColor(2, new Color(255, 153, 218));
         nb.addColor(3, new Color(126, 209, 132));
         nb.addColor(4, new Color(226, 222, 131));
-        navigationBar1.setnavigationBackgroundColor(nb);
+        navigationBar1.setnavigationBackgroundColor(nb); 
+
+        Automovel automovel1 = new Automovel(Marca.FIAT, Categoria.LUXO, Estado.DISPONÍVEL, 999.99, "AAA", 2022, ModeloAutomovel.Celta);
+
     }
-    
+
     public static void addVeiculo(Veiculo veiculo) {
         if (veiculos == null) {
             veiculos = new Veiculo[1];

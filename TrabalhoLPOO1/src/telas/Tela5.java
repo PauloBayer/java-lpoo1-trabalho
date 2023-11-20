@@ -1,5 +1,6 @@
 package telas;
 
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import classes.Automovel;
+import classes.Cliente;
 import classes.Motocicleta;
 import classes.Van;
 import classes.Veiculo;
@@ -28,13 +30,15 @@ public class Tela5 extends TransitionsForm {
     private JScrollPane scrollPaneTabela;
     private DefaultTableModel tableModel;
     private JButton botaoAtualizar;
+    
 
     public Tela5() {
         initComponents();
-        fillTable(); //se tu estiver lendo, bayer, essse aqui ele vai preencher a tabela inicialmente
+        tableModel = new DefaultTableModel(new String[]{"Placa", "Marca", "Modelo", "Ano", "Preço para venda"}, 0);
+        fillTable();
         botaoVender.addActionListener(new VenderVeiculoListener());
-        botaoAtualizar.addActionListener(new AtualizarTabelaListener()); //aqui vai atualizar a tabela
-
+        botaoAtualizar.addActionListener(new AtualizarTabelaListener());
+        Automovel[] variauto = Main.automovel1; 
     }
 
     private void initComponents() {
@@ -53,7 +57,7 @@ public class Tela5 extends TransitionsForm {
         JPanel panelTitle = new JPanel();
         JPanel panelNorth = new JPanel(new GridLayout(2, 1, 5, 5));
 
-        labelTitle.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        labelTitle.setFont(new java.awt.Font("sansserif", 1, 24));
         labelTitle.setForeground(new java.awt.Color(79, 79, 79));
         labelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTitle.setText("Vender Veículos");
@@ -63,7 +67,6 @@ public class Tela5 extends TransitionsForm {
         panelFiltros.add(comboBoxTipo);
         panelFiltros.add(labelMarca);
         panelFiltros.add(comboBoxMarca);
-        
         panelFiltros.add(labelCategoria);
         panelFiltros.add(comboBoxCategoria);
         
@@ -130,7 +133,23 @@ public class Tela5 extends TransitionsForm {
         @Override
         public void actionPerformed(ActionEvent e) {
             fillTable();
+            Automovel[] variauto = Main.automovel1; 
+
+            DefaultTableModel modeloTabela = (DefaultTableModel) tabelaVeiculos.getModel();
+            if ((variauto != null)&&(variauto.length > 0)) {
+                for (int i = 0; i < variauto.length; i++) {
+                     
+                        modeloTabela.addRow(new Object[]{variauto[i].getPlaca(),
+                            variauto[i].getMarca(), variauto[i].getModelo(),
+                            variauto[i].getAno(), variauto[i].getValorParaVenda()});
+                    
+                }
+            }
+
+
         }
+
+
     }
      
     private class VenderVeiculoListener implements ActionListener {
@@ -146,7 +165,7 @@ public class Tela5 extends TransitionsForm {
                         break;
                     }
                 }
-                fillTable(); // Atualiza a tabela após a venda
+                fillTable();
             } else {
                 JOptionPane.showMessageDialog(Tela5.this, "Selecione um veículo para vender.",
                         "Nenhum veículo selecionado", JOptionPane.WARNING_MESSAGE);
