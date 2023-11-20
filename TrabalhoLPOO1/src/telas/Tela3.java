@@ -324,18 +324,20 @@ public class Tela3 extends TransitionsForm {
     private void fillTableCliente(Cliente[] clientes) {
         DefaultTableModel model = (DefaultTableModel) ClientesLocarTable.getModel();
            model.setRowCount(0);
-           
+           System.out.println(clientes.length);
             if (clientes != null) {
             
                 for (Cliente cliente : clientes) {
-
-                    Object[] rowData = {
-                        cliente.getName(),
-                        cliente.getSobrenome(),
-                        cliente.getCPF()
-                    };
-
-                    model.addRow(rowData);
+                    System.out.println("Bateu em um cliente" + cliente.getName());
+                    if (cliente != null) {
+                        
+                        Object[] rowData = {
+                            cliente.getName(),
+                            cliente.getSobrenome(),
+                            cliente.getCPF()
+                        };
+                        model.addRow(rowData);
+                    }
                 }
             }
     }
@@ -430,9 +432,9 @@ public class Tela3 extends TransitionsForm {
         String sobrenomeCliente = inputSobrenomeCliente.getText();
         String cpfClienteString = inputCPFCliente.getText();
         int cpfCliente;
-        if (cpfClienteString == null || cpfClienteString == "") {
+        if (cpfClienteString.isEmpty()) {
             cpfCliente = 0;
-        } else {   
+        } else {
             cpfCliente = Integer.parseInt(cpfClienteString);
         }
         Cliente[] arrayClientes = Cliente.getAllClientes();
@@ -446,16 +448,19 @@ public class Tela3 extends TransitionsForm {
 
                     if (informacoesEncontradas == null) {
                         informacoesEncontradas = new Cliente[1];
+                        informacoesEncontradas[0] = cliente;
                     } else {
                         informacoesEncontradas = new Cliente[informacoesEncontradas.length + 1];
+                        informacoesEncontradas[informacoesEncontradas.length - 1] = cliente;
                     }
 
-                    informacoesEncontradas[informacoesEncontradas.length - 1] = cliente;
-                    JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
-                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
-            fillTableCliente(informacoesEncontradas);
+            if (informacoesEncontradas != null) {
+                JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
+                "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                fillTableCliente(informacoesEncontradas);
+            }
         }
     }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
 
