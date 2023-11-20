@@ -3,6 +3,15 @@ package telas;
 import transitions.TransitionsForm;
 import main.Main;
 import classes.Cliente;
+import classes.Locacao;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import enums.Marca;
 import enums.Categoria;
@@ -15,6 +24,8 @@ import classes.Motocicleta;
 import classes.Van;
 import classes.Veiculo;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  * @author RAVEN
@@ -24,7 +35,8 @@ public class Tela3 extends TransitionsForm {
     public Tela3() {
         initComponents();
         popularComboBoxes();
-        fillTable(Main.veiculos);
+        fillTable(Main.getVeiculosDisponiveis());
+        applyMask();
     }
     
     @SuppressWarnings("unchecked")
@@ -56,6 +68,11 @@ public class Tela3 extends TransitionsForm {
         inputCPFCliente = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         LimparFiltroLocarButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        DiasTextField = new javax.swing.JTextField();
+        LocarButton = new javax.swing.JButton();
+        DataTextField = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(0, 153, 255));
 
@@ -69,7 +86,7 @@ public class Tela3 extends TransitionsForm {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Locar Veículos");
 
-        bPesquisarCliente.setText("Pequisar Veículo");
+        bPesquisarCliente.setText("Pesquisar Veículo");
         bPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPesquisarClienteActionPerformed(evt);
@@ -144,7 +161,7 @@ public class Tela3 extends TransitionsForm {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, true, true, false, true
@@ -205,6 +222,17 @@ public class Tela3 extends TransitionsForm {
             }
         });
 
+        jLabel10.setText("Dias de Locação");
+
+        jLabel11.setText("Data de Locação");
+
+        LocarButton.setText("Locar");
+        LocarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LocarButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,11 +240,6 @@ public class Tela3 extends TransitionsForm {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bPesquisarCliente)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 30, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
@@ -255,21 +278,37 @@ public class Tela3 extends TransitionsForm {
                                 .addGap(45, 45, 45))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LimparFiltroLocarButton)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(395, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(LimparFiltroLocarButton)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel10))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(DiasTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                                    .addComponent(DataTextField)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bPesquisarCliente)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(LocarButton))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 33, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
@@ -304,15 +343,21 @@ public class Tela3 extends TransitionsForm {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(DataTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(categoriaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(categoriaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DiasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bPesquisarCliente)
-                    .addComponent(LimparFiltroLocarButton))
+                    .addComponent(LimparFiltroLocarButton)
+                    .addComponent(LocarButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -345,7 +390,7 @@ public class Tela3 extends TransitionsForm {
 
         if (veiculos != null && veiculos.length > 0) {
             for (Veiculo veiculo : veiculos) {
-                if (veiculo != null && veiculo.getEstado().equals(Estado.DISPONÍVEL)) {
+                if (veiculo != null && veiculo.getEstado().equals(Estado.DISPONÍVEL) || veiculo.getEstado().equals(Estado.NOVO)) {
                     if (automovelRB1.isSelected() && veiculo instanceof Automovel) {
                         if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
                             if (veiculosFiltrados == null) {
@@ -513,6 +558,16 @@ public class Tela3 extends TransitionsForm {
  
     }//GEN-LAST:event_bPesquisarClienteActionPerformed
 
+    private void applyMask() {
+        try {
+            MaskFormatter maskFormatter = new MaskFormatter("##/##/####");
+            maskFormatter.setPlaceholderCharacter('_'); // Optional: You can set a placeholder character
+            DataTextField.setFormatterFactory(new DefaultFormatterFactory(maskFormatter));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void fillTableCliente(Cliente[] clientes) {
         DefaultTableModel model = (DefaultTableModel) ClientesLocarTable.getModel();
            model.setRowCount(0);
@@ -559,7 +614,7 @@ public class Tela3 extends TransitionsForm {
                         veiculo.getMarca(),
                         modelo,
                         veiculo.getAno(),
-                        precoDiaria
+                        String.format("R$%.2f", precoDiaria)
                     };
 
                     model.addRow(rowData);
@@ -659,13 +714,67 @@ public class Tela3 extends TransitionsForm {
     }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
 
     private void LimparFiltroLocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparFiltroLocarButtonActionPerformed
-        fillTable(Main.veiculos);
+        fillTable(Main.getVeiculosDisponiveis());
     }//GEN-LAST:event_LimparFiltroLocarButtonActionPerformed
+
+    private void LocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocarButtonActionPerformed
+
+        int dias = Integer.parseInt(DiasTextField.getText());
+        String data = DataTextField.getText();
+        int veiculoSelecionado = tableFiltrada.getSelectedRow();
+        int clienteSelecionado = ClientesLocarTable.getSelectedRow();
+
+        if (veiculoSelecionado == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um veículo para locar.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (clienteSelecionado == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente para locar.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String placa = tableFiltrada.getValueAt(veiculoSelecionado, 0).toString();
+        int indexVeiculo;
+
+        for (Cliente cliente : Cliente.getAllClientes()) {
+            if (cliente != null && cliente.getCPF() == Integer.parseInt(ClientesLocarTable.getValueAt(clienteSelecionado, 2).toString())) {
+                
+                for (Veiculo veiculo : Main.veiculos) {
+                    if (veiculo != null && veiculo.getPlaca().equals(placa)) {
+                        double valor = veiculo.getValorDiariaLocacao();
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = null;
+                        try {
+                            date = sdf.parse(data);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Calendar calendar = Calendar.getInstance();
+                        if (date != null) {
+                            calendar.setTime(date);
+                        }
+
+                        indexVeiculo = Arrays.asList(Main.veiculos).indexOf(veiculo);
+                        Main.veiculos[indexVeiculo].locar(dias, valor, calendar, cliente);
+                        JOptionPane.showMessageDialog(this, "Veículo locado com sucesso!", "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                        fillTable(Main.getVeiculosDisponiveis());
+                        return;
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_LocarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ClientesLocarTable;
+    private javax.swing.JFormattedTextField DataTextField;
+    private javax.swing.JTextField DiasTextField;
     private javax.swing.JButton LimparFiltroLocarButton;
+    private javax.swing.JButton LocarButton;
     private javax.swing.JButton PesquisarClienteButton;
     private javax.swing.JRadioButton automovelRB1;
     private javax.swing.JButton bPesquisarCliente;
@@ -674,6 +783,8 @@ public class Tela3 extends TransitionsForm {
     private javax.swing.JTextField inputNomeCliente;
     private javax.swing.JTextField inputSobrenomeCliente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

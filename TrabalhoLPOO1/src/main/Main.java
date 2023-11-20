@@ -75,7 +75,7 @@ public class Main extends javax.swing.JFrame {
             int index = 0;
             for (Veiculo veiculo : veiculos) {
                 String estado = veiculo.getEstado().toString();
-                if (estado.equals("DISPONÍVEL")) {
+                if (estado.equals("DISPONÍVEL") || estado.equals("NOVO")) {
                     veiculosDisponiveis[index] = veiculo;
                     index++;
                 }

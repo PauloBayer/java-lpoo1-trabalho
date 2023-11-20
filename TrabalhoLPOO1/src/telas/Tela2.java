@@ -273,7 +273,7 @@ public class Tela2 extends TransitionsForm {
             ModeloMotocicleta modeloMotocicleta = ModeloMotocicleta.valueOf(ModeloMotocicletaComboBox.getSelectedItem().toString());
             ModeloVan modeloVan = ModeloVan.valueOf(ModeloVanComboBox.getSelectedItem().toString());
             double valor = Double.parseDouble(getRawValue(ValorTextField));
-            String placa = getRawValue(PlacaTextField);
+            String placa = PlacaTextField.getText();
             int ano = Integer.parseInt(AnoTextField.getText());
 
             if (AutomovelRadioButton.isSelected()) {
