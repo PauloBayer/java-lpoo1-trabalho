@@ -27,7 +27,7 @@ public class Tela1 extends TransitionsForm {
             if ((arrayClientes != null)&&(arrayClientes.length > 0)) {
                 for (int i = 0; i < arrayClientes.length; i++) {
                     try {
-                        modeloTabela.addRow(new Object[]{i, arrayClientes[i].getName(),
+                        modeloTabela.addRow(new Object[]{arrayClientes[i].getName(),
                             arrayClientes[i].getSobrenome(), arrayClientes[i].getRG(),
                             arrayClientes[i].getCPF(), arrayClientes[i].getEndereco()});
                     } catch (Exception e) {
@@ -66,12 +66,15 @@ public class Tela1 extends TransitionsForm {
         tableClient = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(734, 471));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(79, 79, 79));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Cadastrar Cliente");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 890, -1));
 
         jPanel1.setBackground(new java.awt.Color(235, 155, 89));
 
@@ -152,7 +155,7 @@ public class Tela1 extends TransitionsForm {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,12 +180,15 @@ public class Tela1 extends TransitionsForm {
                 .addGap(27, 27, 27))
         );
 
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 70, -1, 330));
+
         bExcluir.setText("Excluir");
         bExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bExcluirActionPerformed(evt);
             }
         });
+        add(bExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 410, -1, -1));
 
         bEdit.setText("Editar");
         bEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -190,36 +196,10 @@ public class Tela1 extends TransitionsForm {
                 bEditActionPerformed(evt);
             }
         });
+        add(bEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 410, -1, -1));
 
         tableClient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -236,42 +216,7 @@ public class Tela1 extends TransitionsForm {
         });
         jScrollPane2.setViewportView(tableClient);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(bEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bExcluir)
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bEdit)
-                    .addComponent(bExcluir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 849, 149));
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNameActionPerformed
@@ -339,8 +284,8 @@ public class Tela1 extends TransitionsForm {
         }
         String nome = (String)tableClient.getValueAt(selectedRow,0);
         String sobrenome = (String)tableClient.getValueAt(selectedRow,1);
-        int RG = (int)tableClient.getValueAt(selectedRow,2);
-        int CPF = (int)tableClient.getValueAt(selectedRow,3);
+        int RG = Integer.parseInt(tableClient.getValueAt(selectedRow, 2).toString());
+        int CPF = Integer.parseInt(tableClient.getValueAt(selectedRow, 3).toString());
         String endereco = (String)tableClient.getValueAt(selectedRow,4);
         Cliente clienteEdit = Cliente.getCliente(selectedRow);
         clienteEdit.ChangeCliente(nome,sobrenome,RG,CPF,endereco);
