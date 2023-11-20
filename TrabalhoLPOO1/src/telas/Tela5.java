@@ -174,15 +174,14 @@ public class Tela5 extends TransitionsForm {
             int selectedRow = tabelaVeiculos.getSelectedRow();
             if (selectedRow != -1) {
                 String placa = (String) tabelaVeiculos.getValueAt(selectedRow, 0);
-                // Aqui vai ser a lógica de encontrar e realizar a venda do veículo, não esqueça Fellipe
+    
                 for (Veiculo veiculo : Main.getVeiculosDisponiveis()) {
                     if (veiculo.getPlaca().equals(placa)) {
                         veiculo.vender();
                         break;
                     }
                 }
-                //E depois ele vai atualizar a tabela após a venda
-                fillTable();
+                fillTable(); // Atualiza a tabela após a venda
             } else {
                 JOptionPane.showMessageDialog(Tela5.this, "Selecione um veículo para vender.",
                         "Nenhum veículo selecionado", JOptionPane.WARNING_MESSAGE);
