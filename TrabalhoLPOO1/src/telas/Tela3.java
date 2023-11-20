@@ -13,6 +13,7 @@ import enums.ModeloVan;
 import classes.Automovel;
 import classes.Motocicleta;
 import classes.Van;
+import classes.Veiculo;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +24,7 @@ public class Tela3 extends TransitionsForm {
     public Tela3() {
         initComponents();
         popularComboBoxes();
+        fillTable();
     }
     
     @SuppressWarnings("unchecked")
@@ -39,13 +41,19 @@ public class Tela3 extends TransitionsForm {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        inputSearchCliente = new javax.swing.JTextField();
-        bPesquisarAutomovel = new javax.swing.JButton();
+        inputNomeCliente = new javax.swing.JTextField();
         automovelRB1 = new javax.swing.JRadioButton();
         motocicletaRB2 = new javax.swing.JRadioButton();
         vanRB3 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableFiltrada = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ClientesLocarTable = new javax.swing.JTable();
+        PesquisarClienteButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        inputSobrenomeCliente = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        inputCPFCliente = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 255));
 
@@ -59,7 +67,7 @@ public class Tela3 extends TransitionsForm {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Locar Veículos");
 
-        bPesquisarCliente.setText("Pequisar");
+        bPesquisarCliente.setText("Pequisar Veículo");
         bPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPesquisarClienteActionPerformed(evt);
@@ -89,19 +97,12 @@ public class Tela3 extends TransitionsForm {
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(79, 79, 79));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Pesquisar Cliente:");
+        jLabel9.setText("Nome");
 
-        inputSearchCliente.setToolTipText("Cliente ou CPF");
-        inputSearchCliente.addActionListener(new java.awt.event.ActionListener() {
+        inputNomeCliente.setToolTipText("Cliente ou CPF");
+        inputNomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputSearchClienteActionPerformed(evt);
-            }
-        });
-
-        bPesquisarAutomovel.setText("Pesquisar");
-        bPesquisarAutomovel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bPesquisarAutomovelActionPerformed(evt);
+                inputNomeClienteActionPerformed(evt);
             }
         });
 
@@ -157,134 +158,230 @@ public class Tela3 extends TransitionsForm {
         });
         jScrollPane1.setViewportView(tableFiltrada);
 
+        ClientesLocarTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "Sobrenome", "CPF"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(ClientesLocarTable);
+
+        PesquisarClienteButton.setText("Pesquisar Cliente");
+        PesquisarClienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisarClienteButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Sobrenome");
+
+        jLabel5.setText("CPF");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(jLabel9)
-                .addGap(6, 6, 6)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(marcaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inputSobrenomeCliente))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputCPFCliente)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(marcaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categoriaSelect, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(3, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(automovelRB1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(motocicletaRB2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vanRB3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(inputSearchCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bPesquisarCliente)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bPesquisarAutomovel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203))
+                            .addComponent(bPesquisarCliente)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 30, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(automovelRB1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(motocicletaRB2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vanRB3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PesquisarClienteButton)
+                        .addGap(262, 262, 262))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(inputSearchCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bPesquisarCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(inputNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(inputSobrenomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(inputCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(automovelRB1)
                     .addComponent(motocicletaRB2)
-                    .addComponent(vanRB3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(vanRB3)
+                    .addComponent(PesquisarClienteButton))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel7))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(marcaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(categoriaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bPesquisarAutomovel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(categoriaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(bPesquisarCliente)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabel2)
-                    .addContainerGap(423, Short.MAX_VALUE)))
+                    .addContainerGap(443, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPesquisarClienteActionPerformed
-    String infoCliente = inputSearchCliente.getText(); 
-    Cliente[] arrayClientes = Cliente.getAllClientes();
-    Cliente[] informacoesEncontradas = new Cliente[1]; // Array para armazenar informações encontradas
-
-    if (arrayClientes != null && arrayClientes.length > 0) {
-    for (Cliente cliente : arrayClientes) {
-        if (cliente != null &&  (cliente.getName() != null && cliente.getName().equals(infoCliente)) || Integer.toString(cliente.getCPF()).equals(infoCliente)) { 
-            // Verifica se o CPF é igual ao pesquisado
-            informacoesEncontradas[0] = cliente; // Armazena as informações do cliente encontrado
-            JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
-                "Ação Validai", JOptionPane.INFORMATION_MESSAGE);
-            break; // Se encontrou, sai do loop
+            
+         // Verifica se algum dos tipos de locagem está selecionado
+        if (!automovelRB1.isSelected() && !motocicletaRB2.isSelected() && !vanRB3.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Selecione um tipo de locagem.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    }
-     // Verifica se algum dos tipos de locagem está selecionado
-    if (!automovelRB1.isSelected() && !motocicletaRB2.isSelected() && !vanRB3.isSelected()) {
-        JOptionPane.showMessageDialog(this, "Selecione um tipo de locagem.", "Erro", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
 
-    // Verifica se uma marca ou categoria foi selecionada
-    String marcaSelecionada = marcaSelect.getSelectedItem().toString();
-    String categoriaSelecionada = categoriaSelect.getSelectedItem().toString();
-    if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
-        JOptionPane.showMessageDialog(this, "Selecione uma marca ou categoria.", "Erro", JOptionPane.ERROR_MESSAGE);
-        return;
+        // Verifica se uma marca ou categoria foi selecionada
+        String marcaSelecionada = marcaSelect.getSelectedItem().toString();
+        String categoriaSelecionada = categoriaSelect.getSelectedItem().toString();
+        if (marcaSelecionada.equals("Selecionar") && categoriaSelecionada.equals("Selecionar")) {
+            JOptionPane.showMessageDialog(this, "Selecione uma marca ou categoria.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-  }
+        fillTable();
+ 
     }//GEN-LAST:event_bPesquisarClienteActionPerformed
 
+    private void fillTableCliente(Cliente[] clientes) {
+        DefaultTableModel model = (DefaultTableModel) ClientesLocarTable.getModel();
+           model.setRowCount(0);
+           
+            if (clientes != null) {
+            
+                for (Cliente cliente : clientes) {
+
+                    Object[] rowData = {
+                        cliente.getName(),
+                        cliente.getSobrenome(),
+                        cliente.getCPF()
+                    };
+
+                    model.addRow(rowData);
+                }
+            }
+    }
+    
+        private void fillTable() {
+        DefaultTableModel model = (DefaultTableModel) tableFiltrada.getModel();
+           model.setRowCount(0);
+           Veiculo[] veiculos = Main.veiculos;
+           
+            if (veiculos != null) {
+            
+                for (Veiculo veiculo : veiculos) {
+                    String modelo = "";
+                    double precoDiaria = 0;
+
+                    if (veiculo instanceof Automovel) {
+                        modelo = ((Automovel) veiculo).getModelo().toString();
+                        precoDiaria = veiculo.getValorDiariaLocacao();
+                    } else if (veiculo instanceof Van) {
+                        modelo = ((Van) veiculo).getModelo().toString();
+                        precoDiaria = veiculo.getValorDiariaLocacao();
+                    } else if (veiculo instanceof Motocicleta) {
+                        modelo = ((Motocicleta) veiculo).getModelo().toString();
+                        precoDiaria = veiculo.getValorDiariaLocacao();
+                    }
+
+                    Object[] rowData = {
+                        veiculo.getPlaca(),
+                        veiculo.getMarca(),
+                        modelo,
+                        veiculo.getAno(),
+                        precoDiaria
+                    };
+
+                    model.addRow(rowData);
+                }
+            }
+    }
+    
     private void marcaSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaSelectActionPerformed
         // MARCA
     }//GEN-LAST:event_marcaSelectActionPerformed
 
-    private void inputSearchClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSearchClienteActionPerformed
+    private void inputNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputNomeClienteActionPerformed
             //Input que recebe Nome ou CPF
-    }//GEN-LAST:event_inputSearchClienteActionPerformed
+    }//GEN-LAST:event_inputNomeClienteActionPerformed
 
     private void popularComboBoxes() {
      // Limpa os treco tudo
@@ -312,11 +409,6 @@ public class Tela3 extends TransitionsForm {
     }
 }
     
-    private void bPesquisarAutomovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPesquisarAutomovelActionPerformed
-
-   
-    }//GEN-LAST:event_bPesquisarAutomovelActionPerformed
-
     private void automovelRB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelRB1ActionPerformed
       
     }//GEN-LAST:event_automovelRB1ActionPerformed
@@ -333,20 +425,60 @@ public class Tela3 extends TransitionsForm {
 
     }//GEN-LAST:event_vanRB3ActionPerformed
 
+    private void PesquisarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarClienteButtonActionPerformed
+        String nomeCliente = inputNomeCliente.getText(); 
+        String sobrenomeCliente = inputSobrenomeCliente.getText();
+        String cpfClienteString = inputCPFCliente.getText();
+        int cpfCliente;
+        if (cpfClienteString == null || cpfClienteString == "") {
+            cpfCliente = 0;
+        } else {   
+            cpfCliente = Integer.parseInt(cpfClienteString);
+        }
+        Cliente[] arrayClientes = Cliente.getAllClientes();
+        Cliente[] informacoesEncontradas = null; // Array para armazenar informações encontradas
+
+        if (arrayClientes != null && arrayClientes.length > 0) {
+            for (Cliente cliente : arrayClientes) {
+                if (cliente != null && (cliente.getName() != null && cliente.getName().equals(nomeCliente))
+                    || cliente.getSobrenome().equals(sobrenomeCliente)
+                    || cliente.getCPF() == cpfCliente) {
+
+                    if (informacoesEncontradas == null) {
+                        informacoesEncontradas = new Cliente[1];
+                    } else {
+                        informacoesEncontradas = new Cliente[informacoesEncontradas.length + 1];
+                    }
+
+                    informacoesEncontradas[informacoesEncontradas.length - 1] = cliente;
+                    JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
+                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            fillTableCliente(informacoesEncontradas);
+        }
+    }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable ClientesLocarTable;
+    private javax.swing.JButton PesquisarClienteButton;
     private javax.swing.JRadioButton automovelRB1;
-    private javax.swing.JButton bPesquisarAutomovel;
     private javax.swing.JButton bPesquisarCliente;
     private javax.swing.JComboBox<String> categoriaSelect;
-    private javax.swing.JTextField inputSearchCliente;
+    private javax.swing.JTextField inputCPFCliente;
+    private javax.swing.JTextField inputNomeCliente;
+    private javax.swing.JTextField inputSobrenomeCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.ButtonGroup locagemTipos;
     private javax.swing.JComboBox<String> marcaSelect;
     private javax.swing.JRadioButton motocicletaRB2;
