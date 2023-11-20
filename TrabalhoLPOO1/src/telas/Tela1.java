@@ -31,7 +31,6 @@ public class Tela1 extends TransitionsForm {
                             arrayClientes[i].getSobrenome(), arrayClientes[i].getRG(),
                             arrayClientes[i].getCPF(), arrayClientes[i].getEndereco()});
                     } catch (Exception e) {
-                        // Trate a exceção conforme necessário
                         e.printStackTrace();
                     }
                 }
