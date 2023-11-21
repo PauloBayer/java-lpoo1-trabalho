@@ -3,7 +3,6 @@ package telas;
 import transitions.TransitionsForm;
 import main.Main;
 import classes.Cliente;
-import classes.Locacao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,14 +10,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import enums.Marca;
 import enums.Categoria;
 import enums.Estado;
-import enums.ModeloAutomovel;
-import enums.ModeloMotocicleta;
-import enums.ModeloVan;
 import classes.Automovel;
 import classes.Motocicleta;
 import classes.Van;
@@ -544,14 +539,12 @@ public class Tela3 extends TransitionsForm {
                     }
                 }
             }
-            if (veiculosFiltrados != null) {
-                JOptionPane.showMessageDialog(this, "Veículo(s) encontrado(s)!",
-                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+            if (veiculosFiltrados != null && veiculosFiltrados.length > 0) {
                 fillTable(veiculosFiltrados);
             } else {
-                JOptionPane.showMessageDialog(this, "Nenhum veículo encontrado.",
-                        "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Nenhum veículo encontrado.", "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
             }
+            
         }                                
 
         fillTable(veiculosFiltrados);
@@ -672,46 +665,53 @@ public class Tela3 extends TransitionsForm {
 
     }//GEN-LAST:event_vanRB3ActionPerformed
 
-    private void PesquisarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisarClienteButtonActionPerformed
-        String nomeCliente = inputNomeCliente.getText(); 
-        String sobrenomeCliente = inputSobrenomeCliente.getText();
+    private void PesquisarClienteButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String nomeCliente = inputNomeCliente.getText().toLowerCase();
+        String sobrenomeCliente = inputSobrenomeCliente.getText().toLowerCase();
         String cpfClienteString = inputCPFCliente.getText();
         int cpfCliente;
+    
         if (cpfClienteString.isEmpty()) {
             cpfCliente = 0;
         } else {
             cpfCliente = Integer.parseInt(cpfClienteString);
         }
+    
         Cliente[] arrayClientes = Cliente.getAllClientes();
-        Cliente[] informacoesEncontradas = null; // Array para armazenar informações encontradas
-
+        Cliente[] informacoesEncontradas = null;
+    
         if (arrayClientes != null && arrayClientes.length > 0) {
             for (Cliente cliente : arrayClientes) {
-                if (cliente != null && (cliente.getName() != null && cliente.getName().equals(nomeCliente))
-                    || cliente.getSobrenome().equals(sobrenomeCliente)
+                String clienteNome = cliente.getName().toLowerCase();
+                String clienteSobrenome = cliente.getSobrenome().toLowerCase();
+    
+                if ((cliente != null && (clienteNome.equals(nomeCliente) || clienteSobrenome.equals(sobrenomeCliente)))
                     || cliente.getCPF() == cpfCliente) {
-
+    
                     if (informacoesEncontradas == null) {
                         informacoesEncontradas = new Cliente[1];
                         informacoesEncontradas[0] = cliente;
                     } else {
-                        Cliente[] newInformacoesEncontradas = informacoesEncontradas;
-                        informacoesEncontradas = new Cliente[informacoesEncontradas.length + 1];
-                        for (int i = 0; i < newInformacoesEncontradas.length; i++) {
-                            informacoesEncontradas[i] = newInformacoesEncontradas[i];
-                        }
-                        informacoesEncontradas[informacoesEncontradas.length - 1] = cliente;
+                        Cliente[] newInformacoesEncontradas = new Cliente[informacoesEncontradas.length + 1];
+                        System.arraycopy(informacoesEncontradas, 0, newInformacoesEncontradas, 0, informacoesEncontradas.length);
+                        newInformacoesEncontradas[informacoesEncontradas.length] = cliente;
+                        informacoesEncontradas = newInformacoesEncontradas;
                     }
-
                 }
             }
             if (informacoesEncontradas != null) {
                 JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
                 "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
                 fillTableCliente(informacoesEncontradas);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ainda não há clientes cadastrados!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
+    }                                                      
 
     private void LimparFiltroLocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparFiltroLocarButtonActionPerformed
         fillTable(Main.getVeiculosDisponiveis());
@@ -758,7 +758,6 @@ public class Tela3 extends TransitionsForm {
 
                         indexVeiculo = Arrays.asList(Main.veiculos).indexOf(veiculo);
                         Main.veiculos[indexVeiculo].locar(dias, valor, calendar, cliente);
-                        JOptionPane.showMessageDialog(this, "Veículo locado com sucesso!", "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
                         fillTable(Main.getVeiculosDisponiveis());
                         return;
                     }
