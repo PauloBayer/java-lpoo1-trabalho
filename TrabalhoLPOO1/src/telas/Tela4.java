@@ -196,6 +196,8 @@ public void fillTable(Veiculo[] veiculos) {
                     precoVenda = veiculo.getValorParaVenda();
                 }
 
+                double valorLocacao = veiculo.getLocacao().getDias() * veiculo.getValorDiariaLocacao();
+                
                 Object[] rowData = {
                     veiculo.getLocacao().getCliente().getName(),
                     veiculo.getPlaca(),
@@ -205,7 +207,7 @@ public void fillTable(Veiculo[] veiculos) {
                     dateFormat.format(veiculo.getLocacao().getData().getTime()),
                     currencyFormat.format(veiculo.getValorDiariaLocacao()),
                     veiculo.getLocacao().getDias(),
-                    currencyFormat.format(precoVenda)
+                    currencyFormat.format(valorLocacao)
                 };
 
                 model.addRow(rowData);

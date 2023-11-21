@@ -709,7 +709,13 @@ public class Tela3 extends TransitionsForm {
                 JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
                 "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
                 fillTableCliente(informacoesEncontradas);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ainda não há clientes cadastrados!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
 
