@@ -3,7 +3,6 @@ package telas;
 import transitions.TransitionsForm;
 import main.Main;
 import classes.Cliente;
-import classes.Locacao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,14 +10,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import enums.Marca;
 import enums.Categoria;
 import enums.Estado;
-import enums.ModeloAutomovel;
-import enums.ModeloMotocicleta;
-import enums.ModeloVan;
 import classes.Automovel;
 import classes.Motocicleta;
 import classes.Van;
@@ -704,14 +699,19 @@ public class Tela3 extends TransitionsForm {
                     }
                 }
             }
-        }
-    
-        if (informacoesEncontradas == null || informacoesEncontradas.length == 0) {
-            JOptionPane.showMessageDialog(this, "Cliente não encontrado!", "Ação Invalida", JOptionPane.INFORMATION_MESSAGE);
+            if (informacoesEncontradas != null) {
+                JOptionPane.showMessageDialog(this, "Cliente Encontrado!",
+                "Ação Valida", JOptionPane.INFORMATION_MESSAGE);
+                fillTableCliente(informacoesEncontradas);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
+            }
         } else {
-            fillTableCliente(informacoesEncontradas);
+            JOptionPane.showMessageDialog(this, "Ainda não há clientes cadastrados!",
+                "Ação Inválida", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_PesquisarClienteButtonActionPerformed
+    }                                                      
 
     private void LimparFiltroLocarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparFiltroLocarButtonActionPerformed
         fillTable(Main.getVeiculosDisponiveis());
