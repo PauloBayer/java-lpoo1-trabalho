@@ -27,7 +27,7 @@ private String[] marca,  categoria;
     public Tela5() {
         initComponents();
         optionsComboBoxes();
-        fillTable(Main.getVeiculosLocados());
+        fillTable(Main.getVeiculosDisponiveis());
     }
 
     /**
@@ -125,6 +125,11 @@ private String[] marca,  categoria;
         jScrollPane1.setViewportView(tableCarSale);
 
         bSale.setText("Vender");
+        bSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSaleActionPerformed(evt);
+            }
+        });
 
         bUpdate.setText("Atualizar");
         bUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -400,7 +405,36 @@ private String[] marca,  categoria;
         }                                
         fillTable(veiculosFiltrados);
     }//GEN-LAST:event_bUpdateActionPerformed
-    
+
+    private void bSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaleActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tableCarSale.getSelectedRow();
+        if (selectedRow != -1) {
+            int resposta = JOptionPane.showConfirmDialog(Tela5.this,
+                    "Tem certeza que deseja comprar esse?", "Confirmar compra",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+                String placa = (String) tableCarSale.getValueAt(selectedRow, 0);
+
+                Veiculo veiculoParaVender = encontrarVeiculoPorPlaca(placa);
+                veiculoParaVender.vender();
+                this.fillTable(Main.getVeiculosDisponiveis());
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(Tela5.this, "Selecione um veículo para devolver.",
+                    "Nenhum veículo selecionado", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_bSaleActionPerformed
+    private Veiculo encontrarVeiculoPorPlaca(String placa) {
+        for (Veiculo veiculo : Main.getVeiculosDisponiveis()) {
+            if (veiculo.getPlaca().equals(placa)) {
+                return veiculo;
+            }
+        }
+        return null;
+}
     public void fillTable(Veiculo[] veiculos) {
     DefaultTableModel model = (DefaultTableModel) tableCarSale.getModel();
     model.setRowCount(0);
@@ -411,7 +445,7 @@ private String[] marca,  categoria;
 
         for (Veiculo veiculo : veiculos) {
             
-            if (veiculo != null && veiculo.getLocacao() != null) {
+            if (veiculo != null) {
                 
                 String modelo = "";
                 double precoVenda = 0;
@@ -434,7 +468,6 @@ private String[] marca,  categoria;
                     veiculo.getAno(),
                     currencyFormat.format(precoVenda)
                 };
-
                 model.addRow(rowData);
             }
         }
