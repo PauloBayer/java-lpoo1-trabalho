@@ -283,8 +283,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="AnoTextField">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Qual tipo de ve&#xed;culo voc&#xea; gostaria de cadastrar?"/>
@@ -326,8 +324,25 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="PlacaTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(mascaraPlaca)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;    MaskFormatter mascaraPlaca = new MaskFormatter(&quot;UUU-####&quot;);&#xa;    mascaraPlaca.setValidCharacters(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="} catch (ParseException ex) {&#xa;    ex.printStackTrace();&#xa;}"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="ValorTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(mascaraValor)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;    MaskFormatter mascaraValor = new MaskFormatter(&quot;R$ ###.###,00&quot;);&#xa;    mascaraValor.setPlaceholderCharacter(&apos;0&apos;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="} catch (ParseException ex) {&#xa;    ex.printStackTrace();&#xa;}"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="AnoTextField">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(mascaraAno)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try {&#xa;    MaskFormatter mascaraAno = new MaskFormatter(&quot;####&quot;);&#xa;    mascaraAno.setValidCharacters(&quot;0123456789&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="} catch (ParseException ex) {&#xa;    ex.printStackTrace();&#xa;}"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

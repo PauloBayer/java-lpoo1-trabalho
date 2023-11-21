@@ -7,6 +7,9 @@ package telas;
 
 import transitions.TransitionsForm;
 import classes.Cliente;
+import classes.Veiculo;
+import main.Main;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -325,18 +328,36 @@ public class Tela1 extends TransitionsForm {
     private void bExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExcluirActionPerformed
         // TODO add your handling code here:
         int selectedRow = tableClient.getSelectedRow();
-
-    // Verificar se alguma linha está selecionada
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Selecione um cliente para excluir.",
-                "Erro ao excluir cliente", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    // Remove a linha selecionada na tabela
-    DefaultTableModel modeloTabela = (DefaultTableModel) tableClient.getModel();
-    modeloTabela.removeRow(selectedRow);
-    Cliente ClienteExclud = Cliente.getCliente(selectedRow);
-    ClienteExclud.DeleteCliente();
+        
+        boolean hasLocacao = false;
+        int cpf;
+        
+        // Verificar se alguma linha está selecionada
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente para excluir.",
+                    "Erro ao excluir cliente", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Remove a linha selecionada na tabela
+        DefaultTableModel modeloTabela = (DefaultTableModel) tableClient.getModel();
+        Cliente ClienteExclud = Cliente.getCliente(selectedRow);
+        cpf = ClienteExclud.getCPF();
+        Veiculo[] veiculosLocados = Main.getVeiculosLocados();
+        for (int i = 0; i < veiculosLocados.length; i++) {
+            if (veiculosLocados[i].getLocacao().getCliente().getCPF() == cpf) {
+                hasLocacao = true;
+            }
+        }
+        if (hasLocacao) {
+            JOptionPane.showMessageDialog(this, "Não é possível excluir um cliente que possui locação.",
+                    "Erro ao excluir cliente", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            ClienteExclud.DeleteCliente();
+            modeloTabela.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!",
+                    "Sucesso ao excluir cliente", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_bExcluirActionPerformed
 
 
