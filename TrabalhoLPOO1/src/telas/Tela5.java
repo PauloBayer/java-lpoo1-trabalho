@@ -27,7 +27,7 @@ private String[] marca,  categoria;
     public Tela5() {
         initComponents();
         optionsComboBoxes();
-        fillTable(Main.getVeiculosLocados());
+        fillTable(Main.getVeiculosDisponiveis());
     }
 
     /**
@@ -445,7 +445,7 @@ private String[] marca,  categoria;
 
         for (Veiculo veiculo : veiculos) {
             
-            if (veiculo != null && veiculo.getLocacao() != null) {
+            if (veiculo != null ) {
                 
                 String modelo = "";
                 double precoVenda = 0;
